@@ -508,7 +508,7 @@ Print_Sys_Info()
     uname -a
     MemTotal=`free -m | grep Mem | awk '{print  $2}'`
     echo "Memory is: ${MemTotal} MB "
-    df -h
+    #df -h
 }
 
 StartUp()
