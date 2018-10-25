@@ -4,11 +4,12 @@ export PATH
 
 # Check if user is root
 if [ $(id -u) != "0" ]; then
-    echo "Error: You must be root to run this script, please use root to install lnmp"
-    exit 1
+    sudo $0 "$@"
+    exit $?
 fi
 
-cur_dir=$(pwd)
+cur_dir=$(dirname $(readlink -f "$0"))
+
 Stack=$1
 if [ "${Stack}" = "" ]; then
     Stack="lnmp"
@@ -192,18 +193,18 @@ LAMP_Stack()
 case "${Stack}" in
     lnmp)
         Dispaly_Selection
-        LNMP_Stack 2>&1 | tee /root/lnmp-install.log
+        LNMP_Stack 2>&1 | tee $cur_dir/lnmp-install.log
         ;;
     lnmpa)
         Dispaly_Selection
-        LNMPA_Stack 2>&1 | tee /root/lnmp-install.log
+        LNMPA_Stack 2>&1 | tee $cur_dir/lnmp-install.log
         ;;
     lamp)
         Dispaly_Selection
-        LAMP_Stack 2>&1 | tee /root/lnmp-install.log
+        LAMP_Stack 2>&1 | tee $cur_dir/lnmp-install.log
         ;;
     nginx)
-        Install_Only_Nginx 2>&1 | tee /root/nginx-install.log
+        Install_Only_Nginx 2>&1 | tee $cur_dir/nginx-install.log
         ;;
     db)
         Install_Only_Database
