@@ -111,9 +111,6 @@ Install_Nginx()
     \cp conf/enable-php-pathinfo.conf ${Nginx_prefix_Dir}/conf/enable-php-pathinfo.conf
     \cp conf/enable-ssl-example.conf ${Nginx_prefix_Dir}/conf/enable-ssl-example.conf
     \cp conf/magento2-example.conf ${Nginx_prefix_Dir}/conf/magento2-example.conf
-    if [ "${Enable_Nginx_Lua}" = 'y' ]; then
-        sed -i "/location \/nginx_status/i\        location /lua\n        {\n            default_type text/html;\n            content_by_lua 'ngx.say\(\"hello world\"\)';\n        }\n" ${Nginx_prefix_Dir}/conf/nginx.conf
-    fi
 
     mkdir -p ${Default_Website_Dir}
     chmod +w ${Default_Website_Dir}
@@ -125,6 +122,10 @@ Install_Nginx()
     mkdir ${Nginx_prefix_Dir}/conf/vhost
 
     cp conf/default.conf ${Nginx_prefix_Dir}/conf/vhost/default.conf
+
+    if [ "${Enable_Nginx_Lua}" = 'y' ]; then
+        sed -i "/location \/nginx_status/i\    location /lua\n    {\n        default_type text/html;\n        content_by_lua 'ngx.say\(\"hello world\"\)';\n    }\n" ${Nginx_prefix_Dir}/conf/vhost/default.conf
+    fi
 
     if [ "${Default_Website_Dir}" != "/home/wwwroot/default" ]; then
         sed -i "s#/home/wwwroot/default#${Default_Website_Dir}#g" ${Nginx_prefix_Dir}/conf/vhost/default.conf
