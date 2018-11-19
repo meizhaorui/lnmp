@@ -11,6 +11,15 @@ Export_PHP_Autoconf()
     export PHP_AUTOHEADER=/usr/local/autoconf-2.13/bin/autoheader
 }
 
+Install_PHP_Dtrace() 
+{
+    if [ "$PM" = "yum" ]; then
+        yum -y install systemtap-sdt-devel
+    elif [ "$PM" = "apt" ]; then
+        apt-get install -y systemtap-sdt-dev
+    fi
+}
+
 Check_Curl()
 {
     if [ -s /usr/local/curl/bin/curl ]; then
@@ -110,6 +119,7 @@ Install_PHP_52()
 {
     Echo_Blue "[+] Installing ${Php_Ver}..."
     Check_Curl
+    Install_PHP_Dtrace
     Export_PHP_Autoconf
     cd ${cur_dir}/src && rm -rf ${Php_Ver}
     tar jxf ${Php_Ver}.tar.bz2
@@ -178,6 +188,7 @@ Install_PHP_53()
 {
     Echo_Blue "[+] Installing ${Php_Ver}..."
     Check_Curl
+    Install_PHP_Dtrace
     Tarj_Cd ${Php_Ver}.tar.bz2 ${Php_Ver}
     patch -p1 < ${cur_dir}/src/patch/php-5.3-multipart-form-data.patch
     if [ "${Stack}" = "lnmp" ]; then
@@ -272,6 +283,9 @@ Install_PHP_54()
 {
     Echo_Blue "[+] Installing ${Php_Ver}..."
     Tarj_Cd ${Php_Ver}.tar.bz2 ${Php_Ver}
+
+    Install_PHP_Dtrace
+
     if [ "${Stack}" = "lnmp" ]; then
         ./configure --enable-dtrace --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-config-file-scan-dir=/usr/local/php/conf.d --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization ${with_curl} --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf ${with_openssl} --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext ${with_fileinfo} --enable-intl --with-xsl ${PHP_Modules_Options}
     else
@@ -362,6 +376,9 @@ Install_PHP_55()
 {
     Echo_Blue "[+] Installing ${Php_Ver}..."
     Tarj_Cd ${Php_Ver}.tar.bz2 ${Php_Ver}
+
+    Install_PHP_Dtrace
+
     if [ "${Stack}" = "lnmp" ]; then
         ./configure --enable-dtrace --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-config-file-scan-dir=/usr/local/php/conf.d --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization ${with_curl} --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf ${with_openssl} --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext ${with_fileinfo} --enable-opcache --enable-intl --with-xsl ${PHP_Modules_Options}
     else
@@ -452,6 +469,9 @@ Install_PHP_56()
 {
     Echo_Blue "[+] Installing ${Php_Ver}"
     Tarj_Cd ${Php_Ver}.tar.bz2 ${Php_Ver}
+
+    Install_PHP_Dtrace
+
     if [ "${Stack}" = "lnmp" ]; then
         ./configure --enable-dtrace --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-config-file-scan-dir=/usr/local/php/conf.d --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization ${with_curl} --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf ${with_openssl} --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext ${with_fileinfo} --enable-opcache --enable-intl --with-xsl ${PHP_Modules_Options}
     else
@@ -542,6 +562,9 @@ Install_PHP_7()
 {
     Echo_Blue "[+] Installing ${Php_Ver}"
     Tarj_Cd ${Php_Ver}.tar.bz2 ${Php_Ver}
+
+    Install_PHP_Dtrace
+
     if [ "${Stack}" = "lnmp" ]; then
         ./configure --enable-dtrace --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-config-file-scan-dir=/usr/local/php/conf.d --enable-fpm --with-fpm-user=www --with-fpm-group=www --enable-mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization ${with_curl} --enable-mbregex --enable-mbstring --enable-intl --enable-pcntl --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf ${with_openssl} --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext ${with_fileinfo} --enable-opcache --with-xsl ${PHP_Modules_Options}
     else
@@ -611,6 +634,9 @@ Install_PHP_71()
 {
     Echo_Blue "[+] Installing ${Php_Ver}"
     Tarj_Cd ${Php_Ver}.tar.bz2 ${Php_Ver}
+
+    Install_PHP_Dtrace
+
     if [ "${Stack}" = "lnmp" ]; then
         ./configure --enable-dtrace --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-config-file-scan-dir=/usr/local/php/conf.d --enable-fpm --with-fpm-user=www --with-fpm-group=www --enable-mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization ${with_curl} --enable-mbregex --enable-mbstring --enable-intl --enable-pcntl --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf ${with_openssl} --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext ${with_fileinfo} --enable-opcache --with-xsl ${PHP_Modules_Options}
     else
@@ -680,6 +706,9 @@ Install_PHP_72()
 {
     Echo_Blue "[+] Installing ${Php_Ver}"
     Tarj_Cd ${Php_Ver}.tar.bz2 ${Php_Ver}
+
+    Install_PHP_Dtrace
+    
     if [ "${Stack}" = "lnmp" ]; then
         ./configure --enable-dtrace --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-config-file-scan-dir=/usr/local/php/conf.d --enable-fpm --with-fpm-user=www --with-fpm-group=www --enable-mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv-dir --with-freetype-dir=/usr/local/freetype --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization ${with_curl} --enable-mbregex --enable-mbstring --enable-intl --enable-pcntl --enable-ftp --with-gd ${with_openssl} --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext ${with_fileinfo} --enable-opcache --with-xsl ${PHP_Modules_Options}
     else
