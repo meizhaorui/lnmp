@@ -32,19 +32,11 @@ Install_Redis()
             sed -i 's/^# bind 127.0.0.1/bind 127.0.0.1/g' /usr/local/redis/etc/redis.conf
         fi
         sed -i 's#^pidfile /var/run/redis_6379.pid#pidfile /var/run/redis.pid#g' /usr/local/redis/etc/redis.conf
+        sed -i 's#^dir ./#dir /tmp#g' /usr/local/redis/etc/redis.conf
+        sed -e '1i rename-command KEYS ""\nrename-command FLUSHALL ""\nrename-command FLUSHDB ""\nrename-command CONFIG ""' /usr/local/redis/etc/redis.conf
+
         cd ../
         rm -rf ${cur_dir}/src/${Redis_Stable_Ver}
-
-        if [ -s /sbin/iptables ]; then
-            if /sbin/iptables -C INPUT -i lo -j ACCEPT; then
-                /sbin/iptables -A INPUT -p tcp --dport 6379 -j DROP
-                if [ "$PM" = "yum" ]; then
-                    service iptables save
-                elif [ "$PM" = "apt" ]; then
-                    iptables-save > /etc/iptables.rules
-                fi
-            fi
-        fi
     fi
 
     if [ -s ${PHPRedis_Ver} ]; then
@@ -93,13 +85,6 @@ Uninstall_Redis()
     echo "Delete Redis files..."
     rm -rf /usr/local/redis
     rm -rf /etc/init.d/redis
-    if [ -s /sbin/iptables ]; then
-        /sbin/iptables -D INPUT -p tcp --dport 6379 -j DROP
-        if [ "$PM" = "yum" ]; then
-            service iptables save
-        elif [ "$PM" = "apt" ]; then
-            iptables-save > /etc/iptables.rules
-        fi
-    fi
+
     Echo_Green "Uninstall Redis completed."
 }
