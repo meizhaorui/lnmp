@@ -146,4 +146,18 @@ EOF
         sed -i '/nginx.pid/a\
 google_perftools_profiles /tmp/tcmalloc;' ${Nginx_prefix_Dir}/conf/nginx.conf
     fi
+
+    if [ -d /etc/logrotate.d ]; then
+    cat >> /etc/logrotate.d/wwwlogs <<EOF
+/home/wwwlogs/*.log {
+     daily
+     size +500M
+     rotate 7
+     missingok
+     notifempty
+     compress
+     dateext
+}
+EOF
+    fi
 }
