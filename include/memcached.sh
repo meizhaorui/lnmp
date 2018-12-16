@@ -63,22 +63,22 @@ Install_Memcached()
     echo "Which memcached php extension do you choose:"
     echo "Install php-memcache,(Discuz x) please enter: 1"
     echo "Install php-memcached, please enter: 2"
-    read -p "Enter 1 or 2 (Default 1): " ver
+    # read -p "Enter 1 or 2 (Default 1): " ver
 
-    if [ "${ver}" = "1" ]; then
+    # if [ "${ver}" = "1" ]; then
+    #     echo "You choose php-memcache"
+    #     PHP_ZTS="memcache.so"
+    # elif [ "${ver}" = "2" ]; then
+    #     echo "You choose php-memcached"
+    #     PHP_ZTS="memcached.so"
+    # else
+        # ver="1"
         echo "You choose php-memcache"
         PHP_ZTS="memcache.so"
-    elif [ "${ver}" = "2" ]; then
-        echo "You choose php-memcached"
-        PHP_ZTS="memcached.so"
-    else
-        ver="1"
-        echo "You choose php-memcache"
-        PHP_ZTS="memcache.so"
-    fi
+    # fi
 
     echo "====== Installing memcached ======"
-    Press_Start
+    # Press_Start
 
     rm -f ${PHP_Path}/conf.d/005-memcached.ini
     Addons_Get_PHP_Ext_Dir
