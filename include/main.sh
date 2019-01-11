@@ -129,7 +129,8 @@ PHP_Selection()
         echo "6: Install ${PHP_Info[5]}"
         echo "7: Install ${PHP_Info[6]}"
         echo "8: Install ${PHP_Info[7]}"
-        read -p "Enter your choice (1, 2, 3, 4, 5, 6, 7 or 8): " PHPSelect
+        echo "0: Do not Install php"
+        read -p "Enter your choice (1, 2, 3, 4, 5, 6, 7 or 8) [0]: " PHPSelect
     fi
 
     case "${PHPSelect}" in
@@ -162,8 +163,8 @@ PHP_Selection()
         echo "You will install ${PHP_Info[7]}"
         ;;
     *)
-        echo "No input,You will install ${PHP_Info[4]}"
-        PHPSelect="5"
+        echo "No input, disable php"
+        PHPSelect="0"
     esac
 }
 

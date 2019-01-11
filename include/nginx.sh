@@ -104,7 +104,7 @@ Install_Nginx()
     else
         \cp conf/nginx.conf ${Nginx_prefix_Dir}/conf/nginx.conf
     fi
-    
+
     \cp -ra conf/rewrite ${Nginx_prefix_Dir}/conf/
     \cp conf/pathinfo.conf ${Nginx_prefix_Dir}/conf/pathinfo.conf
     \cp conf/enable-php.conf ${Nginx_prefix_Dir}/conf/enable-php.conf
@@ -115,7 +115,7 @@ Install_Nginx()
     mkdir -p ${Default_Website_Dir}
     chmod +w ${Default_Website_Dir}
     mkdir -p /home/wwwlogs
-    chmod 777 /home/wwwlogs
+    chmod 755 /home/wwwlogs
 
     chown -R www:www ${Default_Website_Dir}
 
