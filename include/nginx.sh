@@ -118,6 +118,8 @@ Install_Nginx()
     chmod 755 /home/wwwlogs
 
     chown -R www:www ${Default_Website_Dir}
+    chown -R www:www /home/wwwroot
+    chown -R www:www /home/wwwlogs
 
     mkdir ${Nginx_prefix_Dir}/conf/vhost
 
