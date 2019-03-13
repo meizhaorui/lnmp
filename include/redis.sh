@@ -33,6 +33,8 @@ Install_Redis()
         fi
         sed -i 's#^pidfile /var/run/redis_6379.pid#pidfile /var/run/redis.pid#g' /usr/local/redis/etc/redis.conf
         sed -i 's#^dir ./#dir /tmp#g' /usr/local/redis/etc/redis.conf
+        local mm=$(($(cat /proc/meminfo | grep MemTotal | awk '{print $2}') / 2)) 
+        sed -i -e "1i maxmemory ${mm}kb \nmaxmemory-policy allkeys-lru" /usr/local/redis/etc/redis.conf
         sed -i -e '1i rename-command KEYS ""\nrename-command FLUSHALL ""\nrename-command FLUSHDB ""\nrename-command CONFIG ""' /usr/local/redis/etc/redis.conf
 
         cd ../
