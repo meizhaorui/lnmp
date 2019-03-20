@@ -55,7 +55,7 @@ elif [ "${PHPSelect}" = "6" ]; then
 elif [ "${PHPSelect}" = "7" ]; then
     Php_Ver='php-7.1.18'
 elif [ "${PHPSelect}" = "8" ]; then
-    Php_Ver='php-7.2.6'
+    Php_Ver='php-7.2.16'
 fi
 
 if [[ "${PHPSelect}" =~ ^[123]$ ]]; then
@@ -77,7 +77,7 @@ XCache_Ver='xcache-3.2.0'
 ImageMagick_Ver='ImageMagick-7.0.7-35'
 Imagick_Ver='imagick-3.4.3'
 ZendOpcache_Ver='zendopcache-7.0.5'
-Redis_Stable_Ver='redis-5.0.2'
+Redis_Stable_Ver='redis-5.0.3'
 PHPRedis_Ver='redis-4.2.0'
 Memcached_Ver='memcached-1.5.7'
 Libmemcached_Ver='libmemcached-1.0.18'

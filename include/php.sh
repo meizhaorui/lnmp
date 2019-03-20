@@ -827,13 +827,14 @@ eof
         \cp ${cur_dir}/conf/ocp.php ${Default_Website_Dir}/ocp.php
     fi
     echo "============================Install PHPMyAdmin================================="
-    [[ -d ${Default_Website_Dir}/phpmyadmin ]] && rm -rf ${Default_Website_Dir}/phpmyadmin
+    local phpmyadmin="17593"
+    [[ -d ${Default_Website_Dir}/$phpmyadmin ]] && rm -rf ${Default_Website_Dir}/$phpmyadmin
     tar Jxf ${PhpMyAdmin_Ver}.tar.xz
-    mv ${PhpMyAdmin_Ver} ${Default_Website_Dir}/phpmyadmin
-    \cp ${cur_dir}/conf/config.inc.php ${Default_Website_Dir}/phpmyadmin/config.inc.php
-    sed -i 's/LNMPORG/LNMP.org_0'$RANDOM`date '+%s'`$RANDOM'9_VPSer.net/g' ${Default_Website_Dir}/phpmyadmin/config.inc.php
-    mkdir ${Default_Website_Dir}/phpmyadmin/{upload,save}
-    chmod 755 -R ${Default_Website_Dir}/phpmyadmin/
-    chown www:www -R ${Default_Website_Dir}/phpmyadmin/
+    mv ${PhpMyAdmin_Ver} ${Default_Website_Dir}/$phpmyadmin
+    \cp ${cur_dir}/conf/config.inc.php ${Default_Website_Dir}/$phpmyadmin/config.inc.php
+    sed -i 's/LNMPORG/LNMP.org_0'$RANDOM`date '+%s'`$RANDOM'9_VPSer.net/g' ${Default_Website_Dir}/$phpmyadmin/config.inc.php
+    mkdir ${Default_Website_Dir}/$phpmyadmin/{upload,save}
+    chmod 755 -R ${Default_Website_Dir}/$phpmyadmin/
+    chown www:www -R ${Default_Website_Dir}/$phpmyadmin/
     echo "============================phpMyAdmin install completed======================="
 }

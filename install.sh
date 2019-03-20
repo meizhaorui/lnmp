@@ -101,6 +101,11 @@ Init_Install()
         Deb_Lib_Opt
         Deb_Check_MySQL
     fi
+
+    Check_PHP_Option
+}
+
+function Install_MYSQL() {
     if [ "${DBSelect}" = "1" ]; then
         Install_MySQL_51
     elif [ "${DBSelect}" = "2" ]; then
@@ -121,7 +126,6 @@ Init_Install()
         Install_MariaDB_102
     fi
     TempMycnf_Clean
-    Check_PHP_Option
 }
 
 Install_PHP()
@@ -143,13 +147,17 @@ Install_PHP()
     elif [ "${PHPSelect}" = "8" ]; then
         Install_PHP_72
     fi
+
+    LNMP_PHP_Opt
 }
 
 LNMP_Stack()
 {
     Init_Install
-    Install_PHP
-    LNMP_PHP_Opt
+
+    Install_PHP &
+    Install_MYSQL &
+
     Install_Nginx
     Creat_PHP_Tools
     Add_Iptables_Rules
